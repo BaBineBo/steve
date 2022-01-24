@@ -21,7 +21,7 @@ public class Steve {
         if(currentLocation.lookWest()){
             System.out.print("Theres a path to the west. ");
             if (currentLocation.goWest().getName() != null){
-                System.out.print("It's " + currentLocation.goWest().getName() + "." );
+                System.out.print("It's " + currentLocation.goWest().getName() + ".\n" );
             } else { System.out.print("Steve has not been in that room. \n");}
         } else {
             System.out.println("Steve can't go west.");
@@ -30,7 +30,7 @@ public class Steve {
         if(currentLocation.lookSouth()){
             System.out.print("Theres a path to the south. ");
             if (currentLocation.goSouth().getName() != null){
-                System.out.print("It's " + currentLocation.goSouth().getName() + "." );
+                System.out.print("It's " + currentLocation.goSouth().getName() + ".\n" );
             }else { System.out.print("Steve has not been in that room. \n");}
         } else {
             System.out.println("Steve can't go south.");
@@ -39,7 +39,7 @@ public class Steve {
         if(currentLocation.lookEast()){
             System.out.print("Theres a path to the east. ");
             if (currentLocation.goEast().getName() != null){
-                System.out.print("It's " + currentLocation.goEast().getName() + "." );
+                System.out.print("It's " + currentLocation.goEast().getName() + ".\n" );
             }else { System.out.print("Steve has not been in that room. \n");}
         } else {
             System.out.println("Steve can't go east.");
@@ -48,7 +48,7 @@ public class Steve {
         if(currentLocation.lookNorth()){
             System.out.print("Theres a path to the north. ");
             if (currentLocation.goNorth().getName() != null){
-                System.out.print("It's " + currentLocation.goNorth().getName() + "." );
+                System.out.print("It's " + currentLocation.goNorth().getName() + ".\n" );
             }else { System.out.print("Steve has not been in that room. \n");}
         } else {
             System.out.println("Steve can't go north.");
@@ -76,14 +76,21 @@ public class Steve {
     }
 
     public void lookAround() throws Exception{
-        // list were steve can go 
-        wereToGo();
+        // Descripte the room that steve is in
+        this.currentLocation.getDescription();
+        System.out.println();
 
         // list cretures in the room
         this.currentLocation.listCreatures();
+        // list items in the room
+        this.currentLocation.listItems();
+        System.out.println();
+        
+        // list were steve can go 
+        wereToGo();
     }
 
-
+    // FUnction for moving Steve accross rooms
     public void move(String direction){
         // check if a room exists in the direction
         switch (direction) {

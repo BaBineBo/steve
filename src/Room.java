@@ -1,14 +1,17 @@
+import java.util.Collections;
 import java.util.List;
 
 public class Room {
 
     // each room has roomas in each other direction
+    // --------------------------------------------------------------------
     private Room west;
     private Room east;
     private Room north;
     private Room south;
 
     // name and description of room
+    // --------------------------------------------------------------------
     private String name;
     private String description;
     private boolean unlocked;
@@ -24,31 +27,88 @@ public class Room {
     
     // a room will maybe have people in it
     
-    // constructor ////////////////////////////////////////////////////////////////////////////////
-    public Room(String name, String description, List<Item> items, boolean key){
+    // constructor 
+    // --------------------------------------------------------------------
+    public Room(String name, String description, List<Item> items, List<Creature> creatures, boolean key){
 
         this.name   = name;
+
         this.description = description;
 
         this.items = items;
 
+        this.creatures = creatures;
+
         this.unlocked = key;
     }
 
-    // Chek if rooms has living creatures in it
-    public boolean isPopulated(){
-        return creatures.size()>0;
+    // Chek if rooms has Items in it
+    // --------------------------------------------------------------------
+
+    // Function to add items to room, append to current list
+    public void addItems(List<Item> items) {
+        this.items.addAll(items);
     }
 
-    public void listCreatures(){
-        if (this.isPopulated()) {
-            for(int i =0; i < creatures.size(); i++){
-                System.out.println(creatures.get(i).getName() + " is in the room.");
-            }
+    // Check if room has any items
+    public boolean hasItems (){
+        if( this.items == null || this.items.isEmpty()) {
+            return false;
+        } else if (this.items.size()>0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
-    // connecting rooms /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Return all Items in room
+    public void listItems(){
+        if (this.hasItems()) {
+            for(int i = 0; i < items.size(); i++){
+                Item item = items.get(i);
+                System.out.println("There is a/an" + item.getDescription() + " " + item.getName() + " placed " + item.getPlacement() + "." ); // TODO /////////////////////////////////////////////////////////////////////////////////////////////////
+            }
+        } else {
+            System.out.println("Steve can't see any items in the room.");
+        }
+    }
+
+    // Chek if rooms has living creatures in it
+    // --------------------------------------------------------------------
+
+    // function to adds creatures to a room. Append to the end of current list.
+    public void addCreatures (List<Creature> creatures){
+        this.creatures.addAll(creatures);
+    }
+
+    // Quick check if there are any creature in room
+    public boolean isPopulated(){
+        if( this.creatures == null || this.creatures.isEmpty()) {
+            return false;
+        } else if (this.creatures.size()>0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // List all creatures in the room
+    public void listCreatures(){
+        if (this.isPopulated()) {
+            for(int i = 0; i < creatures.size(); i++){
+                System.out.println(creatures.get(i).getName() + " is in the room.");
+            }
+        } else {
+            System.out.println("There are no creatures in the room.");
+        }
+    }
+
+    // connecting rooms 
+    // --------------------------------------------------------------------
+
+    // When connecting a room to this room from any direction, 
+    // we want to establish the same connection for the other room.
+
     public void connectNorth(Room room){
         this.north = room;
         if (room.lookSouth()) return;
@@ -72,7 +132,9 @@ public class Room {
         if (room.lookSouth()) return;
         room.connectEast(this);
     }
-    // get functions
+
+    // get functions 
+    // --------------------------------------------------------------------
 
     public String getName(){
         if (this.visited) {
@@ -82,7 +144,16 @@ public class Room {
         }
     }
 
+    public String getDescription(){
+        if (this.visited) {
+            return this.description;
+        } else {
+            return null;
+        }
+    }
+
     // moving and changing rooms
+    // --------------------------------------------------------------------
     public void discoverRoom() {
         this.visited = true;
     }
@@ -105,7 +176,8 @@ public class Room {
         return this.east;
     }
 
-    // looking at other rooms
+    // looking at other rooms. Return if a room exists in a direction
+    // --------------------------------------------------------------------
     public boolean lookNorth(){
         return this.north != null;
     }

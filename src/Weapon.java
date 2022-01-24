@@ -4,8 +4,8 @@ public class Weapon extends Item {
     
 
     // constructor
-    public Weapon(String name, String description, int durability, int damage){
-        super(name, description);
+    public Weapon(String name, String description, String placement, int durability, int damage){
+        super(name, description, placement);
         this.durability = durability;
         this.damage = damage;
     }

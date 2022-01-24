@@ -5,6 +5,7 @@ public class Human extends Creature implements Fighter {
 
 
     // Fighter functions
+    // --------------------------------------------------------------------
     public void attack(Alive a){
         return;
     }

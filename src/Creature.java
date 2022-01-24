@@ -4,7 +4,10 @@ public class Creature implements Alive{
     protected int health;
     protected int stamina;
     protected int defence;
+
+    // things that change how we perceive creatures
     private boolean isAlive;
+    private boolean isKnown;
 
 
 
@@ -28,5 +31,9 @@ public class Creature implements Alive{
     // get functions
     public String getName(){
         return this.name;
+    }
+    
+    public boolean isKnown(){
+        return this.isKnown;
     }
 }

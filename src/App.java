@@ -12,23 +12,27 @@ public class App {
         // Test that program is running
         System.out.println("Good morning world! ");
 
-        // Create objects
-        boolean game = true;
-        Room secondRoom = new Room("Test chamber", null, null, true);
-        Room firstRoom = new Room("Steves bedroom", "This is steves bedroom, were he wakes up every day." , null, true);
-        Steve steve = new Steve(firstRoom);
+        // Create NPC
 
-        // Connect rooms
+        // Create rooms and interiors, aswell as connecting them
+        boolean game = true;
+        Room start = new Room("start",null,null,null,false);
+        Room secondRoom = new Room("Test chamber", null, null,null, true);
+        Room firstRoom = new Room("Steves bedroom", "This is steves bedroom, were he wakes up every day." , null,null, true);
         firstRoom.connectNorth(secondRoom);
 
-        // read input variables
+
+        // Make steve the main character
+        Steve steve = new Steve(firstRoom);
+
+        // Read input variables
         BufferedReader reader = new BufferedReader( new InputStreamReader(System.in));
         String input = "";
         List<String> inputParts;
 
 
-        // interperate text in three parts at most
-        // action
+        // Interperate text in three parts at most
+        // Action-words
         String[] actions = new String[]{"attack", "take", "look", "inspect", "go", "walk", "run",};
 
         // differentiate between game states
