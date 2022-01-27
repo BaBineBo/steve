@@ -1,18 +1,21 @@
 import java.util.List;
 
-public class Steve {
-
-    private String name = "Steve";
+public class Steve extends Human {
     private Room currentLocation;
     private List<Item> inventory;
 
     private int nmbTriedMoves = 0;
 
     // constructor /////////////////////////////////////////////////
-    public Steve(Room startLocation){
+    public Steve(Room startLocation, int health, int stamina, Weapon weapon, int defence, String taunt, String catchphrase){
+        super("Steve", health, stamina, weapon,defence, taunt, catchphrase, false);
         this.currentLocation = startLocation;
     }
 
+    // get functions
+    public Room getLocation(){
+        return this.currentLocation;
+    }
 
     // Helper functions
     private void wereToGo() throws Exception{
@@ -69,15 +72,9 @@ public class Steve {
         System.out.println("\nThere is no way that Steve can go " + direction + ".");
     }
 
-    // Functions
-
-    public String getName(){
-        return this.name;
-    }
-
     public void lookAround() throws Exception{
         // Descripte the room that steve is in
-        this.currentLocation.getDescription();
+        System.out.print("Steve is in " + this.currentLocation.getName() + ", " + this.currentLocation.getDescription());
         System.out.println();
 
         // list cretures in the room
@@ -134,6 +131,20 @@ public class Steve {
             default    :System.out.println("There is no way that Steve can go " + direction + " because is not a direction on his compass."); 
                         break;
         }
+    }
+
+    
+    // Functions from interface Fight
+
+    @Override
+    public void taunt() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void catchphrase() {
+        // TODO Auto-generated method stub
     }
 
 }

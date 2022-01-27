@@ -21,7 +21,7 @@ public class Room {
     private List<Item> items;
 
     // a room might have creatures in it
-    private List<Creature> creatures;
+    private List<Alive> creatures;
 
     // A way to unlock rooms
     
@@ -29,7 +29,7 @@ public class Room {
     
     // constructor 
     // --------------------------------------------------------------------
-    public Room(String name, String description, List<Item> items, List<Creature> creatures, boolean key){
+    public Room(String name, String description, List<Item> items, List<Alive> creatures, boolean key){
 
         this.name   = name;
 
@@ -66,7 +66,7 @@ public class Room {
         if (this.hasItems()) {
             for(int i = 0; i < items.size(); i++){
                 Item item = items.get(i);
-                System.out.println("There is a/an" + item.getDescription() + " " + item.getName() + " placed " + item.getPlacement() + "." ); // TODO /////////////////////////////////////////////////////////////////////////////////////////////////
+                System.out.println("There is a/an" + item.getDescription() + " " + item.getName() + "." ); // TODO /////////////////////////////////////////////////////////////////////////////////////////////////
             }
         } else {
             System.out.println("Steve can't see any items in the room.");
@@ -101,6 +101,10 @@ public class Room {
         } else {
             System.out.println("There are no creatures in the room.");
         }
+    }
+
+    public List<Alive> getCreatures(){
+        return this.creatures;
     }
 
     // connecting rooms 
@@ -140,7 +144,7 @@ public class Room {
         if (this.visited) {
             return this.name;
         } else {
-            return null;
+            return "";
         }
     }
 
@@ -148,7 +152,7 @@ public class Room {
         if (this.visited) {
             return this.description;
         } else {
-            return null;
+            return "";
         }
     }
 
